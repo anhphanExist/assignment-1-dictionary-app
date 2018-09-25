@@ -7,7 +7,9 @@ public class DictionaryManagement {
      */
 	public static Dictionary insertFromCommandline() {
 	    Dictionary res = new Dictionary();
-	    try (BufferedReader buff = new BufferedReader(new InputStreamReader(System.in))) {
+	    try (
+                // Create BufferedReader to read data file
+	            BufferedReader buff = new BufferedReader(new InputStreamReader(System.in)) ) {
             //Enter number of words from keyboard
             System.out.print("Enter a number of Words: ");
             int wordNum = Integer.parseInt(buff.readLine());
@@ -17,7 +19,11 @@ public class DictionaryManagement {
                 res.addDict(readWord());
             }
         } catch(Exception e) {
-            System.out.println(e.getClass());
+            System.out.println(e.getClass().getSimpleName() + " - " + e.getMessage());
+        
+            for (Throwable t: e.getSuppressed()) {
+                System.out.println("Surpress: " + t.getMessage());
+            }
         }
         return res;
 	}
@@ -29,7 +35,9 @@ public class DictionaryManagement {
 	public static Dictionary insertFromFile() {
 	    // Declare a dictionary variable to store data
 	    Dictionary res = new Dictionary();
-	    try (BufferedReader buff = new BufferedReader(new FileReader("data.txt"))) {
+	    try (
+                // Create BufferedReader to read data file
+                BufferedReader buff = new BufferedReader(new FileReader("src/data.txt")) ) {
 	        // Declare a String variable to store data
             String curTarget;
             // Read till the end of file
@@ -45,7 +53,12 @@ public class DictionaryManagement {
                 res.addDict(newWord);
             }
         } catch (Exception e) {
-            System.out.println(e.getClass());
+            System.out.println("Error: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+            
+            for (Throwable t: e.getSuppressed()) {
+                System.out.println("Surpress: " + t.getMessage());
+            }
+            
         }
 	    return res;
     }
