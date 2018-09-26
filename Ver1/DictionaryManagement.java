@@ -16,7 +16,7 @@ public class DictionaryManagement {
             
             //Looping for read word list from keyboard
             for (int i = 0; i < wordNum; i++) {
-                res.addDict(readWord());
+                res.addDict(readWord(buff));
             }
         } catch(Exception e) {
             System.out.println(e.getClass().getSimpleName() + " - " + e.getMessage());
@@ -32,12 +32,12 @@ public class DictionaryManagement {
      * insert dictionary from file
      * @return new dictionary gather resources from a file
      */
-	public static Dictionary insertFromFile() {
+	public static Dictionary insertFromFile(String fileName) {
 	    // Declare a dictionary variable to store data
 	    Dictionary res = new Dictionary();
 	    try (
                 // Create BufferedReader to read data file
-                BufferedReader buff = new BufferedReader(new FileReader("src/data.txt")) ) {
+                BufferedReader buff = new BufferedReader(new FileReader(fileName)) ) {
 	        // Declare a String variable to store data
             String curTarget;
             // Read till the end of file
@@ -53,8 +53,9 @@ public class DictionaryManagement {
                 res.addDict(newWord);
             }
         } catch (Exception e) {
+	        // Print exception name
             System.out.println("Error: " + e.getClass().getSimpleName() + " - " + e.getMessage());
-            
+            // Get all exception remaining
             for (Throwable t: e.getSuppressed()) {
                 System.out.println("Surpress: " + t.getMessage());
             }
@@ -65,11 +66,12 @@ public class DictionaryManagement {
     
     /**
      * read word from keyboard input
+     * @param buff to handle stream
      * @return new word
      */
-	private static Word readWord() {
+	private static Word readWord(BufferedReader buff) {
         Word newWord = new Word();
-	    try (BufferedReader buff = new BufferedReader(new InputStreamReader(System.in))) {
+	    try {
             //Firstly we enter a Vietnamese word
             System.out.print("Enter English Word: ");
             newWord.setTarget(buff.readLine());
