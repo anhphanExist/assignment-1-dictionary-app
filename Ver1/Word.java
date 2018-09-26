@@ -1,20 +1,21 @@
 public class Word {
-	private String Target, Explain;
+	private String target;
+	private String explain;
 
 	//Set + get Target
-	public void setTarget(String _Target){
-		this.Target = _Target;
+	public void setTarget(String _target) {
+		this.target = _target;
 	}
-	public String getTarget(){
-		return this.Target;
+	public String getTarget() {
+		return this.target;
 	}
 
 	//Set + get Explain
-	public void setExplain(String _Explain){
-		this.Explain = _Explain;
+	public void setExplain(String _explain) {
+		this.explain = _explain;
 	}
-	public String getExplain(){
-		return this.Explain;
+	public String getExplain() {
+		return this.explain;
 	}
 
 
