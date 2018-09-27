@@ -1,35 +1,87 @@
 import java.io.*;
 
 public class DictionaryManagement {
-	//Reading data from keyboard
-	static InputStreamReader Reader = new InputStreamReader(System.in);
-	static BufferedReader Buff = new BufferedReader(Reader);
-
-	//Return Dictionary type 
-	public Dictionary insertFromCommandline() throws IOException{
-		//Enter number of words from keyboard
-		System.out.print("Enter a number of Words: ");
-		int WordNum = Integer.parseInt(Buff.readLine()); 
-
-		//Looping for read word list from keyboard
-		Dictionary res = new Dictionary();
-		for (int i=0 ; i<WordNum ; i++) {
-			res.AddDict(ReadWord()); 
-		}
-		return res;
+    /**
+     * insert dictionary from command line
+     * @return new dictionary data from keyboard input
+     */
+	public static Dictionary insertFromCommandline() {
+	    Dictionary res = new Dictionary();
+	    try (
+                // Create BufferedReader to read data file
+	            BufferedReader buff = new BufferedReader(new InputStreamReader(System.in)) ) {
+            //Enter number of words from keyboard
+            System.out.print("Enter a number of Words: ");
+            int wordNum = Integer.parseInt(buff.readLine());
+            
+            //Looping for read word list from keyboard
+            for (int i = 0; i < wordNum; i++) {
+                res.addDict(readWord(buff));
+            }
+        } catch(Exception e) {
+            System.out.println(e.getClass().getSimpleName() + " - " + e.getMessage());
+        
+            for (Throwable t: e.getSuppressed()) {
+                System.out.println("Surpress: " + t.getMessage());
+            }
+        }
+        return res;
 	}
-
-	public static Word ReadWord() throws IOException {
-		Word NewWord = new Word(); 
-		
-		//Firstly we enter a Vietnamese word
-		System.out.print("Enter Vietnamese Word: ");
-		NewWord.setTarget(Buff.readLine());
-
-		//Then we enter an English explaination
-		System.out.print("Enter Enlish Explain: "); 
-		NewWord.setExplain(Buff.readLine());
-
-		return NewWord;
+    
+    /**
+     * insert dictionary from file
+     * @return new dictionary gather resources from a file
+     */
+	public static Dictionary insertFromFile(String fileName) {
+	    // Declare a dictionary variable to store data
+	    Dictionary res = new Dictionary();
+	    try (
+                // Create BufferedReader to read data file
+                BufferedReader buff = new BufferedReader(new FileReader(fileName)) ) {
+	        // Declare a String variable to store data
+            String curTarget;
+            // Read till the end of file
+            while ((curTarget = buff.readLine()) != null) {
+                // Create a Word variable to store data
+                Word newWord = new Word();
+                // Set target for new word
+                newWord.setTarget(curTarget);
+                // Set explain for new word
+                curTarget = buff.readLine();
+                newWord.setExplain(curTarget);
+                // Add new word to res
+                res.addDict(newWord);
+            }
+        } catch (Exception e) {
+	        // Print exception name
+            System.out.println("Error: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+            // Get all exception remaining
+            for (Throwable t: e.getSuppressed()) {
+                System.out.println("Surpress: " + t.getMessage());
+            }
+            
+        }
+	    return res;
+    }
+    
+    /**
+     * read word from keyboard input
+     * @param buff to handle stream
+     * @return new word
+     */
+	private static Word readWord(BufferedReader buff) {
+        Word newWord = new Word();
+	    try {
+            //Firstly we enter a Vietnamese word
+            System.out.print("Enter English Word: ");
+            newWord.setTarget(buff.readLine());
+            
+            //Then we enter an English explaination
+            System.out.print("Enter Vietnamese Explain: ");
+            newWord.setExplain(buff.readLine());
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+        }
+        return newWord;
 	}
 }

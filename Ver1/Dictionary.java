@@ -1,20 +1,21 @@
 import java.util.*;
 
-public class Dictionary{
-    private ArrayList<Word> Dict = new ArrayList<Word>();
+public class Dictionary {
+    // An arrayList of Word to store data
+    static protected ArrayList<Word> dict = new ArrayList<Word>();
 
-    //Add NewWord into the end of the Dictionary
-    public void AddDict(Word _NewWord){
-        this.Dict.add(_NewWord);
+    // Add NewWord into the end of the Dictionary
+    public void addDict(Word _newWord) {
+        this.dict.add(_newWord);
     }
 
-    //Get the size of the dict
-    public int GetSize(){
-        return this.Dict.size();
+    // Get the size of the dict
+    public int getSize() {
+        return this.dict.size();
     }
 
-    //Get Dict
-    public ArrayList<Word> GetDict(){
-        return this.Dict;
+    // Get Dict
+    public ArrayList<Word> getDict(){
+        return this.dict;
     }
 }
