@@ -1,6 +1,14 @@
 public class DictionaryCommandline extends Dictionary {
     
     /**
+     * basic insert and print screen
+     */
+    public static void dictionaryBasic() {
+        DictionaryManagement.insertFromCommandline();
+        showAllWords();
+    }
+    
+    /**
      * show all words including explanation in the dictionary
      */
 	public static void showAllWords() {
