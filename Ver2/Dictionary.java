@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 public class Dictionary {
     // An arrayList of Word to store data
     static protected ArrayList<Word> dict = new ArrayList<Word>();
