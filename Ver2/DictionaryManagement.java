@@ -1,10 +1,11 @@
 import java.io.*;
 
 public class DictionaryManagement {
+    
     /**
      * print the catching error messeage
      */
-    public static void catchingMessage(Exception e){
+    public static void catchingException(Exception e){
         System.out.println(e.getClass().getSimpleName() + " - " + e.getMessage());
         for (Throwable t: e.getSuppressed()) {
             System.out.println("Surpress: " + t.getMessage());
@@ -29,7 +30,7 @@ public class DictionaryManagement {
     private static String vietFromFile(String input){
         String res = new String();
         int indexSpace = input.indexOf(' ');
-        res = input.substring(indexSpace+1,input.length());
+        res = input.substring(indexSpace + 1,input.length());
         return res;
     }
 
@@ -51,7 +52,7 @@ public class DictionaryManagement {
                 res.addDict(readWord(buff));
             }
         } catch(Exception e) {
-            catchingMessage(e);
+            catchingException(e);
         }
         return res;
     }
@@ -84,7 +85,7 @@ public class DictionaryManagement {
                 res.addDict(newWord);
             }
         } catch (Exception e) {
-            catchingMessage(e);
+            catchingException(e);
         }
         return res;
     }
@@ -104,7 +105,7 @@ public class DictionaryManagement {
             System.out.print("Enter Vietnamese Explain: ");
             newWord.setExplain(buff.readLine());
         } catch (Exception e) {
-            catchingMessage(e);
+            catchingException(e);
         }
         return newWord;
     }
@@ -113,23 +114,27 @@ public class DictionaryManagement {
      * Looking up the word reading from keyboard
      */
     public static void dictionaryLookup(Dictionary dict){
-        String input = new String();
+        String input;
         boolean found = false;
-        try (BufferedReader buff = new BufferedReader(new InputStreamReader(System.in))){
+        try (
+                // Create a buffer to read input from command line
+                BufferedReader buff = new BufferedReader(new InputStreamReader(System.in))) {
             System.out.print("Enter a looked up word: ");
             input = buff.readLine();
             for (Word curWord: dict.getDict()) {
-                if  (curWord.getTarget().equalsIgnoreCase(input)){
-                    input = curWord.getTarget();//Fix the input to the dictionary form
+                if  (curWord.getTarget().equalsIgnoreCase(input)) {
+                    // Fix the input to the dictionary form
+                    input = curWord.getTarget();
                     System.out.println(input + " in Vietnamese is: " + curWord.getExplain());
+                    // The word is founded so found = true
                     found = true;
                 }
             }
             if (!found) {
-                System.out.println("We can not explain " + input + " in Vietnamese");
+                System.out.println("We can not explain " + "'" + input + "'" + " in Vietnamese");
             }
         } catch (Exception e) {
-            catchingMessage(e);
+            catchingException(e);
         }
     }
 
