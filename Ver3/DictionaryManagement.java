@@ -18,7 +18,7 @@ public class DictionaryManagement {
      * @return a English word - type string
      */
     private static String engFromFile(String input){
-        String res = new String();
+        String res;
         int indexSpace = input.indexOf(' ');
         res = input.substring(0,indexSpace);
         return res;
