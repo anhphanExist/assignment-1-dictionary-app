@@ -41,7 +41,7 @@ public class DictionaryCommandline {
      * Read from file and print screen
      */
     public static void dictionaryAdvanced(){
-        Dictionary dict = DictionaryManagement.insertFromFile("src/com/company/data.txt");
+        Dictionary dict = DictionaryManagement.insertFromFile("src/data.txt");
         dict.sortDict();
         showAllWords(dict);
 
