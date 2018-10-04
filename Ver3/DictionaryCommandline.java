@@ -1,4 +1,3 @@
-package com.company;
 import java.io.*;
 
 
@@ -13,13 +12,46 @@ public class DictionaryCommandline {
     }
 
     /**
+     * Read input from the keyboard
+     * @return input String
+     */
+    public static String inputFromKeyboard(){
+        String res = new String();
+        try (
+                // Create BufferedReader to read data file
+                BufferedReader buff = new BufferedReader(new InputStreamReader(System.in)) ) {
+            System.out.print("Enter lookup word: ");
+            String input = buff.readLine();
+            res = res.concat(input);
+            res = res.concat(" ");
+
+            System.out.print("Enter search key word: ");
+            input = buff.readLine();
+            res = res.concat(input);
+
+        }
+        catch (Exception e ){
+            DictionaryManagement.catchingException(e);
+        }
+        return res;
+    }
+
+
+    /**
      * Read from file and print screen
      */
     public static void dictionaryAdvanced(){
         Dictionary dict = DictionaryManagement.insertFromFile("src/com/company/data.txt");
         dict.sortDict();
         showAllWords(dict);
-        DictionaryManagement.dictionaryLookup(dict);
+
+        //Read the input from key board
+        String input = inputFromKeyboard();
+        String inputLookup = input.substring(0,input.indexOf(' '));
+        String inputSearch = input.substring(input.indexOf(' ')+1,input.length());
+
+        DictionaryManagement.dictionaryLookup(dict,inputLookup);
+        DictionaryManagement.dictionarySearch(dict,inputSearch);
     }
 
     /**

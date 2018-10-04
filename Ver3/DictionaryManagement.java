@@ -114,19 +114,14 @@ public class DictionaryManagement {
     /**
      * Looking up the word reading from keyboard
      */
-    public static void dictionaryLookup(Dictionary dict){
-        String input;
+    public static void dictionaryLookup(Dictionary dict , String input){
         boolean found = false;
-        try (
-                // Create a buffer to read input from command line
-                BufferedReader buff = new BufferedReader(new InputStreamReader(System.in))) {
-            System.out.print("Enter a looked up word: ");
-            input = buff.readLine();
+        try {
             for (Word curWord: dict.getDict()) {
                 if  (curWord.getTarget().equalsIgnoreCase(input)) {
-                    // Fix the input to the dictionary form
-                    input = curWord.getTarget();
-                    System.out.println(input + " in Vietnamese is: " + curWord.getExplain());
+                    // Explain the input from the dictionary
+                    String inputExplain = curWord.getTarget();
+                    System.out.println(inputExplain + " in Vietnamese is: " + curWord.getExplain());
                     // The word is founded so found = true
                     found = true;
                 }
@@ -139,5 +134,40 @@ public class DictionaryManagement {
         }
     }
 
+    /**
+     * Search the word List begin with input string
+     */
+    public static void dictionarySearch(Dictionary dict, String input){
+        boolean found = false;
+        String res = new String();
+
+        try{
+            for (Word curWord: dict.getDict()) {
+                if (curWord.getTarget().indexOf(input) == 0){
+                    found = true;
+                    res = res.concat(curWord.getTarget());
+                    res = res.concat(" ");
+                }
+                else if (found){
+                    break;
+                }
+            }
+
+        } catch (Exception e) {
+            catchingException(e);
+        }
+        if (!found) {
+            res = "We can not found any words with the key word: ";
+            res = res.concat(input);
+        }
+        else {
+            String newRes = new String("List of words with the key word \"");
+            newRes = newRes.concat(input);
+            newRes = newRes.concat("\" is: ");
+            res = newRes.concat(res);
+        }
+
+        System.out.println(res);
+    }
 
 }
