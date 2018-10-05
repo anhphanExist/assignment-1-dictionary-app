@@ -166,7 +166,7 @@ public class DictionaryManagement {
         try {
             // loop through current dictionary and find related words
             for (Word curWord: dict.getDict()) {
-                if (curWord.getTarget().indexOf(searchString) == 0) {
+                if (curWord.getTarget().toLowerCase().indexOf(searchString.toLowerCase()) == 0) {
                     found = true;
                     res = res.concat(curWord.getTarget());
                     res = res.concat("\n");
