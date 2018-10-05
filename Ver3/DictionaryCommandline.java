@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.Buffer;
 
 
 public class DictionaryCommandline {
@@ -17,7 +18,7 @@ public class DictionaryCommandline {
     /**
      * Read from file and print screen
      */
-    public static void dictionaryAdvanced(BufferedReader buff) {
+    public static void dictionaryAdvanced1(BufferedReader buff) {
         // Initialize new dictionary and get its information from txt file
         Dictionary dict = DictionaryManagement.insertFromFile("src/data.txt");
         // Sort current dictionary
@@ -26,6 +27,19 @@ public class DictionaryCommandline {
         showAllWords(dict);
         // Look for a word in current dictionary
         DictionaryManagement.dictionaryLookup(dict, buff);
+    }
+    
+    public static void dictionaryAdvanced2(BufferedReader buff) {
+        // Initialize new dicitonary and get its information from txt file
+        Dictionary dict = DictionaryManagement.insertFromFile("src/data.txt");
+        // Sort current dictionary
+        dict.sortDict();
+        // Show dictionary
+        showAllWords(dict);
+        // Find and edit a word in current dictionary
+        DictionaryManagement.dictionaryFindAndEdit(dict, buff);
+        // Show dictionary again
+        showAllWords(dict);
     }
     //endregion
     
