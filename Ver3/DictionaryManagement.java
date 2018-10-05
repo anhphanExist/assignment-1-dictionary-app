@@ -106,7 +106,10 @@ public class DictionaryManagement {
     
     public static void dictionaryLookup(Dictionary dict, BufferedReader buff) {
         String input = searchFromCommandline(buff);
-        dictionarySearcher(dict, input);
+        int indexFoundWord = dictionarySearcher(dict, input);
+        if (indexFoundWord != -1) {
+            System.out.println(dict.getDict().get(indexFoundWord).getTarget() + " in Vietnamese is: " + dict.getDict().get(indexFoundWord).getExplain());
+        }
     }
     
     /**
@@ -130,14 +133,14 @@ public class DictionaryManagement {
      * @param input search word from input
      * Looking up the word reading from keyboard
      */
-    public static void dictionarySearcher(Dictionary dict, String input) {
+    public static int dictionarySearcher(Dictionary dict, String input) {
         boolean found = false;
+        int indexResult = -1;
         try {
-            for (Word curWord: dict.getDict()) {
-                if  (curWord.getTarget().equalsIgnoreCase(input)) {
+            for (int i = 0; i < dict.getDict().size(); i++) {
+                if  (dict.getDict().get(i).getTarget().equalsIgnoreCase(input)) {
                     // Explain the input from the dictionary
-                    String inputExplain = curWord.getTarget();
-                    System.out.println(inputExplain + " in Vietnamese is: " + curWord.getExplain());
+                    indexResult = i;
                     // The word is founded so found = true
                     found = true;
                 }
@@ -149,6 +152,7 @@ public class DictionaryManagement {
         } catch (Exception e) {
             Main.catchingException(e);
         }
+        return indexResult;
     }
     
     /**
@@ -189,5 +193,67 @@ public class DictionaryManagement {
         
     }
     //endregion
+    
+    /**
+     * Find and edit a word in current dictionary
+     * @param dict current dictionary
+     * @param buff input stream
+     */
+    public static void dictionaryFindAndEdit(Dictionary dict, BufferedReader buff) {
+        // Search for input word
+        String input = searchFromCommandline(buff);
+        int indexEditWord = dictionarySearcher(dict, input);
+        // if input word exist then continue to edit
+        if (indexEditWord != -1) {
+            Word editWord = dict.getDict().get(indexEditWord);
+            String editTarget;
+            String editExplain;
+            try {
+                // Draw instructions
+                System.out.println("Found: " + editWord.getTarget());
+                System.out.println("There are 3 options:");
+                System.out.println("1. Edit target");
+                System.out.println("2. Edit explanation");
+                System.out.println("3. Edit both target and explanation");
+                System.out.println("Otherwise enter anything else to exit");
+                System.out.print("Please choose an option: ");
+                // Read option
+                String option = buff.readLine();
+                if (option.equals("1")) {
+                    System.out.print("Enter new target: ");
+                    editTarget = editFromCommandline(buff);
+                    editWord.setTarget(editTarget);
+                } else if (option.equals("2")) {
+                    System.out.println("Enter new explain: ");
+                    editExplain = editFromCommandline(buff);
+                    editWord.setExplain(editExplain);
+                } else if (option.equals("3")) {
+                    System.out.print("Enter new target: ");
+                    editTarget = editFromCommandline(buff);
+                    System.out.println("Enter new explain: ");
+                    editExplain = editFromCommandline(buff);
+                    editWord.setTarget(editTarget);
+                    editWord.setExplain(editExplain);
+                }
+            } catch (Exception e) {
+                Main.catchingException(e);
+            }
+        }
+    }
+    
+    /**
+     * Read input
+     * @param buff input stream
+     * @return
+     */
+    private static String editFromCommandline(BufferedReader buff) {
+        String edit = null;
+        try {
+            edit = buff.readLine();
+        } catch(Exception e) {
+            Main.catchingException(e);
+        }
+        return edit;
+    }
 
 }
