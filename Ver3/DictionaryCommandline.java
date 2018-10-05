@@ -2,58 +2,34 @@ import java.io.*;
 
 
 public class DictionaryCommandline {
+    
+    //region Original interact functions with command line
     /**
      * Insert and print screen
      */
-    public static void dictionaryBasic(){
-        Dictionary basic = DictionaryManagement.insertFromCommandline();
+    public static void dictionaryBasic(BufferedReader buff) {
+        // Initialize new dictionary and get its information from command line
+        Dictionary basic = DictionaryManagement.insertFromCommandline(buff);
         basic.sortDict();
         showAllWords(basic);
     }
-
-    /**
-     * Read input from the keyboard
-     * @return input String
-     */
-    public static String inputFromKeyboard(){
-        String res = new String();
-        try (
-                // Create BufferedReader to read data file
-                BufferedReader buff = new BufferedReader(new InputStreamReader(System.in)) ) {
-            System.out.print("Enter lookup word: ");
-            String input = buff.readLine();
-            res = res.concat(input);
-            res = res.concat(" ");
-
-            System.out.print("Enter search key word: ");
-            input = buff.readLine();
-            res = res.concat(input);
-
-        }
-        catch (Exception e ){
-            DictionaryManagement.catchingException(e);
-        }
-        return res;
-    }
-
-
+    
     /**
      * Read from file and print screen
      */
-    public static void dictionaryAdvanced(){
+    public static void dictionaryAdvanced(BufferedReader buff) {
+        // Initialize new dictionary and get its information from txt file
         Dictionary dict = DictionaryManagement.insertFromFile("src/data.txt");
+        // Sort current dictionary
         dict.sortDict();
+        // Show dictionary
         showAllWords(dict);
-
-        //Read the input from key board
-        String input = inputFromKeyboard();
-        String inputLookup = input.substring(0,input.indexOf(' '));
-        String inputSearch = input.substring(input.indexOf(' ')+1,input.length());
-
-        DictionaryManagement.dictionaryLookup(dict,inputLookup);
-        DictionaryManagement.dictionarySearch(dict,inputSearch);
+        // Look for a word in current dictionary
+        DictionaryManagement.dictionaryLookup(dict, buff);
     }
-
+    //endregion
+    
+    //region Print all words in current dictionary to command line
     /**
      * show all words including explanation in the dictionary
      */
@@ -66,9 +42,9 @@ public class DictionaryCommandline {
             System.out.println();
         }
     }
-
-
-
+    //endregion
+    
+    //region Export to txt file
     /**
      * export dictionary to file
      */
@@ -82,9 +58,10 @@ public class DictionaryCommandline {
             }
         }
         catch (Exception e) {
-            DictionaryManagement.catchingException(e);
+            Main.catchingException(e);
         }
     }
+    //endregion
 
 }
 
