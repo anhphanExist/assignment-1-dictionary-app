@@ -9,7 +9,8 @@ public class Main {
                 // Initialize input stream
                 BufferedReader buff = new BufferedReader(new InputStreamReader(System.in))) {
 //            DictionaryCommandline.dictionaryBasic(buff);
-            DictionaryCommandline.dictionaryAdvanced(buff);
+//            DictionaryCommandline.dictionaryAdvanced1(buff);
+            DictionaryCommandline.dictionaryAdvanced2(buff);
         } catch (Exception e) {
             catchingException(e);
         }
