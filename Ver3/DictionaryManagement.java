@@ -1,49 +1,15 @@
 import java.io.*;
-import java.util.ArrayList;
 
 public class DictionaryManagement {
-
-    /**
-     * print the catching error messeage
-     */
-    public static void catchingException(Exception e){
-        System.out.println(e.getClass().getSimpleName() + " - " + e.getMessage());
-        for (Throwable t: e.getSuppressed()) {
-            System.out.println("Surpress: " + t.getMessage());
-        }
-    }
-
-    /**
-     * Read the English word from string from file
-     * @return a English word - type string
-     */
-    private static String engFromFile(String input){
-        String res;
-        int indexSpace = input.indexOf(' ');
-        res = input.substring(0,indexSpace);
-        return res;
-    }
-
-    /**
-     * Read the Vietnamese word from string from file
-     * @return a Vietnamese word - type string
-     */
-    private static String vietFromFile(String input){
-        String res = new String();
-        int indexSpace = input.indexOf(' ');
-        res = input.substring(indexSpace + 1,input.length());
-        return res;
-    }
-
+    
+    //region Add new word to dictionary
     /**
      * insert dictionary from command line
      * @return new dictionary data from keyboard input
      */
-    public static Dictionary insertFromCommandline() {
+    public static Dictionary insertFromCommandline(BufferedReader buff) {
         Dictionary res = new Dictionary();
-        try (
-                // Create BufferedReader to read data file
-                BufferedReader buff = new BufferedReader(new InputStreamReader(System.in)) ) {
+        try {
             //Enter number of words from keyboard
             System.out.print("Enter a number of Words: ");
             int wordNum = Integer.parseInt(buff.readLine());
@@ -53,11 +19,55 @@ public class DictionaryManagement {
                 res.addDict(readWord(buff));
             }
         } catch(Exception e) {
-            catchingException(e);
+            Main.catchingException(e);
         }
         return res;
     }
-
+    
+    /**
+     * read word from keyboard input
+     * @return new word
+     */
+    private static Word readWord(BufferedReader buff) {
+        Word newWord = new Word();
+        try {
+            //Firstly we enter a Vietnamese word
+            System.out.print("Enter English CommandLineDictionary.Word: ");
+            newWord.setTarget(buff.readLine());
+            
+            //Then we enter an English explanation
+            System.out.print("Enter Vietnamese Explain: ");
+            newWord.setExplain(buff.readLine());
+        } catch (Exception e) {
+            Main.catchingException(e);
+        }
+        return newWord;
+    }
+    //endregion
+    
+    //region Get dictionary from txt file
+    /**
+     * Read the English word from string from file
+     * @return a English word - type string
+     */
+    private static String engFromFile(String input) {
+        String res;
+        int indexSpace = input.indexOf(' ');
+        res = input.substring(0,indexSpace);
+        return res;
+    }
+    
+    /**
+     * Read the Vietnamese word from string from file
+     * @return a Vietnamese word - type string
+     */
+    private static String vietFromFile(String input) {
+        String res = new String();
+        int indexSpace = input.indexOf(' ');
+        res = input.substring(indexSpace + 1, input.length());
+        return res;
+    }
+    
     /**
      * insert dictionary from file
      * @return new dictionary gather resources from a file
@@ -74,10 +84,10 @@ public class DictionaryManagement {
             // Read till the end of file
 
             while ((curTarget = buff.readLine()) != null) {
-                // Create a Word variable to store data
+                // Create a CommandLineDictionary.Word variable to store data
                 Word newWord = new Word();
                 //We read data from file
-                //Each line containing both English and Vietnamese Word
+                //Each line containing both English and Vietnamese CommandLineDictionary.Word
                 //Which is separated by a tab character
 
                 newWord.setTarget(engFromFile(curTarget));
@@ -86,35 +96,41 @@ public class DictionaryManagement {
                 res.addDict(newWord);
             }
         } catch (Exception e) {
-            catchingException(e);
+            Main.catchingException(e);
         }
         return res;
     }
-
+    //endregion
+    
+    //region Find a word in the current dictionary
+    
+    public static void dictionaryLookup(Dictionary dict, BufferedReader buff) {
+        String input = searchFromCommandline(buff);
+        dictionarySearcher(dict, input);
+    }
+    
     /**
-     * read word from keyboard input
-     * @return new word
+     * Read input from the keyboard
+     * @return input String
      */
-    private static Word readWord(BufferedReader buff) {
-        Word newWord = new Word();
+    public static String searchFromCommandline(BufferedReader buff) {
+        // Initialize variable to store input string
+        String input = new String();
         try {
-            //Firstly we enter a Vietnamese word
-            System.out.print("Enter English Word: ");
-            newWord.setTarget(buff.readLine());
-
-            //Then we enter an English explanation
-            System.out.print("Enter Vietnamese Explain: ");
-            newWord.setExplain(buff.readLine());
-        } catch (Exception e) {
-            catchingException(e);
+            System.out.print("I am looking for this word: ");
+            input = buff.readLine();
+        } catch (Exception e ) {
+            Main.catchingException(e);
         }
-        return newWord;
+        return input;
     }
 
     /**
+     * @param dict current dictionary
+     * @param input search word from input
      * Looking up the word reading from keyboard
      */
-    public static void dictionaryLookup(Dictionary dict , String input){
+    public static void dictionarySearcher(Dictionary dict, String input) {
         boolean found = false;
         try {
             for (Word curWord: dict.getDict()) {
@@ -127,47 +143,51 @@ public class DictionaryManagement {
                 }
             }
             if (!found) {
-                System.out.println("We can not explain " + "'" + input + "'" + " in Vietnamese");
+                // search for related words if they exist
+                dictionarySearchRelate(dict, input);
             }
         } catch (Exception e) {
-            catchingException(e);
+            Main.catchingException(e);
         }
     }
-
+    
     /**
-     * Search the word List begin with input string
+     * Search for related words
+     * @param dict current dictionary
+     * @param searchString the search input
      */
-    public static void dictionarySearch(Dictionary dict, String input){
+    public static void dictionarySearchRelate(Dictionary dict, String searchString) {
+        String res = new String("\n");
         boolean found = false;
-        String res = new String();
-
-        try{
+        try {
+            // loop through current dictionary and find related words
             for (Word curWord: dict.getDict()) {
-                if (curWord.getTarget().indexOf(input) == 0){
+                if (curWord.getTarget().indexOf(searchString) == 0) {
                     found = true;
                     res = res.concat(curWord.getTarget());
-                    res = res.concat(" ");
+                    res = res.concat("\n");
                 }
-                else if (found){
+                else if (found) {
                     break;
                 }
             }
+    
+            if (!found) {
+                res = "We can't found any words with the key word: ";
+                res = res.concat(searchString);
+            }
+            else {
+                String newRes = "We can't found any words with the key word: " + searchString + "\nRelated words: ";
+                res = newRes.concat(res);
+            }
+    
+            System.out.println(res);
 
         } catch (Exception e) {
-            catchingException(e);
+            Main.catchingException(e);
         }
-        if (!found) {
-            res = "We can not found any words with the key word: ";
-            res = res.concat(input);
-        }
-        else {
-            String newRes = new String("List of words with the key word \"");
-            newRes = newRes.concat(input);
-            newRes = newRes.concat("\" is: ");
-            res = newRes.concat(res);
-        }
-
-        System.out.println(res);
+        
     }
+    //endregion
 
 }
