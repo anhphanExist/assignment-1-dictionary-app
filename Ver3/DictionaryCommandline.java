@@ -67,7 +67,7 @@ public class DictionaryCommandline {
             int no = 0;
             for (Word curWord: dict.getDict()) {
                 no++;
-                out.write(curWord.getTarget() + "\t" + curWord.getExplain());
+                out.write(curWord.getTarget().toLowerCase() + "\t" + curWord.getExplain().toLowerCase());
                 out.newLine();
             }
         }
