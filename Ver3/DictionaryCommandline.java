@@ -29,6 +29,10 @@ public class DictionaryCommandline {
         DictionaryManagement.dictionaryLookup(dict, buff);
     }
     
+    /**
+     * read from file and perform edit
+     * @param buff buffer input stream
+     */
     public static void dictionaryAdvanced2(BufferedReader buff) {
         // Initialize new dicitonary and get its information from txt file
         Dictionary dict = DictionaryManagement.insertFromFile("src/data.txt");
@@ -38,6 +42,23 @@ public class DictionaryCommandline {
         showAllWords(dict);
         // Find and edit a word in current dictionary
         DictionaryManagement.dictionaryFindAndEdit(dict, buff);
+        // Show dictionary again
+        showAllWords(dict);
+    }
+
+    /**
+     * Read from file and perform remove
+     * @param buff
+     */
+    public static void dictionaryAdvanced3(BufferedReader buff) {
+        // Initialize new dicitonary and get its information from txt file
+        Dictionary dict = DictionaryManagement.insertFromFile("src/CommandLineDictionary/data.txt");
+        // Sort current dictionary
+        dict.sortDict();
+        // Show dictionary
+        showAllWords(dict);
+        // Remove a word in current dictionary
+        DictionaryManagement.dictionaryRemove(dict, buff);
         // Show dictionary again
         showAllWords(dict);
     }
