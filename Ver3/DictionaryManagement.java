@@ -46,26 +46,26 @@ public class DictionaryManagement {
     //endregion
     
     //region Get dictionary from txt file
-    /**
+        /**
      * Read the English word from string from file
      * @return a English word - type string
      */
-    private static String engFromFile(String input) {
+    private static String readTargetFromFile(String input) {
         String res;
         int indexSpace = input.indexOf(' ');
-        res = input.substring(0,indexSpace);
-        return res;
+        res = input.substring(0, indexSpace);
+        return res.toLowerCase();
     }
     
     /**
      * Read the Vietnamese word from string from file
      * @return a Vietnamese word - type string
      */
-    private static String vietFromFile(String input) {
+    private static String readExplainFromFile(String input) {
         String res = new String();
         int indexSpace = input.indexOf(' ');
         res = input.substring(indexSpace + 1, input.length());
-        return res;
+        return res.toLowerCase();
     }
     
     /**
@@ -90,8 +90,8 @@ public class DictionaryManagement {
                 //Each line containing both English and Vietnamese CommandLineDictionary.Word
                 //Which is separated by a tab character
 
-                newWord.setTarget(engFromFile(curTarget));
-                newWord.setExplain(vietFromFile(curTarget));
+                newWord.setTarget(readTargetFromFile(curTarget));
+                newWord.setExplain(readExplainFromFile(curTarget));
 
                 res.addDict(newWord);
             }
