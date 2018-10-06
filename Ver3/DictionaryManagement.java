@@ -194,6 +194,7 @@ public class DictionaryManagement {
     }
     //endregion
     
+    //region Find and Edit a word in dictionary
     /**
      * Find and edit a word in current dictionary
      * @param dict current dictionary
@@ -255,5 +256,24 @@ public class DictionaryManagement {
         }
         return edit;
     }
+    //endregion
 
+    //region Remove a word in dictionary
+    /**
+     * Remove a word in dictionary
+     * @param dict dictionary
+     * @param buff buffer input sream
+     */
+    public static void dictionaryRemove(Dictionary dict, BufferedReader buff) {
+        // Search from input
+        System.out.println("You are going to remove a word");
+        String input = searchFromCommandline(buff);
+        int indexWord = dictionarySearcher(dict, input);
+        // If input word exist then continue to remove
+        if (indexWord != -1) {
+            Word removeWord = dict.getDict().remove(indexWord);
+            System.out.println("Succesfully remove \"" + removeWord.getTarget() + "\" from the dictionary!");
+        }
+    }
+    //endregion
 }
