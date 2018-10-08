@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/" fx:controller="dictionaryApplication.dictionarySceneController">
+    <left>
+        <VBox prefHeight="556.0" prefWidth="283.0" BorderPane.alignment="CENTER">
+            <children>
+                <TextField prefHeight="40.0" prefWidth="215.0" />
+                <ListView prefHeight="531.0" prefWidth="215.0" />
+            </children>
+        </VBox>
+    </left>
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Get Resources" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Add" />
+                        <MenuItem mnemonicParsing="false" text="Edit" />
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <bottom>
+        <HBox BorderPane.alignment="CENTER">
+            <children>
+                <Region prefHeight="18.0" prefWidth="413.0" HBox.hgrow="ALWAYS" />
+                <Label prefHeight="18.0" prefWidth="194.0" text="Phan Anh and Tuan Dat Production">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
+    </bottom>
+    <right>
+        <WebView prefHeight="556.0" prefWidth="565.0" BorderPane.alignment="CENTER" />
+    </right>
+    <center>
+        <Region prefHeight="356.0" prefWidth="30.0" BorderPane.alignment="CENTER" />
+    </center>
+</BorderPane>
