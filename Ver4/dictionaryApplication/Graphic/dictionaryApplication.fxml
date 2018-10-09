@@ -9,18 +9,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionaryApplication.dictionaryApplicationController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionaryApplication.Graphic.dictionaryApplicationController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
                   <MenuItem mnemonicParsing="false" text="Get Resources" />
-              <MenuItem mnemonicParsing="false" onAction="#handleMenuItemClose" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -52,10 +53,36 @@
                   <HBox prefHeight="25.0" prefWidth="500.0">
                      <children>
                         <Region prefHeight="46.0" prefWidth="100.0" />
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Search" />
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#searchButton" prefHeight="26.0" prefWidth="140.0" text="Search" />
                         <Region prefHeight="46.0" prefWidth="20.0" />
                         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="I'm Feeling Lucky" />
                         <Region prefHeight="46.0" prefWidth="100.0" />
+                     </children>
+                  </HBox>
+                  <Region prefHeight="78.0" prefWidth="500.0" />
+                  <HBox prefHeight="188.0" prefWidth="500.0">
+                     <children>
+                        <Pane prefHeight="188.0" prefWidth="211.0">
+                           <children>
+                              <AnchorPane layoutX="1.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="explainLabel" alignment="TOP_LEFT" layoutX="20.0" layoutY="60.0" prefHeight="104.0" prefWidth="161.0" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" />
+                                    <Label alignment="CENTER" layoutX="55.0" layoutY="32.0" prefHeight="17.0" prefWidth="91.0" text="Meaning" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </Pane>
+                        <Region prefHeight="188.0" prefWidth="95.0" />
+                        <Pane prefHeight="188.0" prefWidth="226.0">
+                           <children>
+                              <AnchorPane layoutX="8.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="relatedLabel" alignment="TOP_LEFT" layoutX="20.0" layoutY="60.0" prefHeight="104.0" prefWidth="161.0" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" />
+                                    <Label alignment="CENTER" layoutX="55.0" layoutY="32.0" prefHeight="17.0" prefWidth="91.0" text="Related Word" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </Pane>
                      </children>
                   </HBox>
                </children>

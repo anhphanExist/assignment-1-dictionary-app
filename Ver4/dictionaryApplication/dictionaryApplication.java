@@ -6,14 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class dictionaryApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("dictionaryApplication.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Graphic/dictionaryApplication.fxml"));
             primaryStage.setTitle("Simple Dictionary");
             primaryStage.setScene(new Scene(root, 800, 600));
             primaryStage.setResizable(false);

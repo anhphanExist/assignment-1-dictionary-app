@@ -1,7 +1,5 @@
-package dictionaryManagement;
+package dictionaryApplication.BasicDict;
 
-import dictionaryApplication.Dictionary;
-import dictionaryApplication.Word;
 import dictionaryApplication.dictionaryApplication;
 
 import java.io.*;
@@ -77,4 +75,33 @@ public class DictionaryManagement {
         return res;
     }
     //endregion
+
+    //region searching Function
+    /**
+     * @param dict current dictionary
+     * @param input search word from input
+     * Looking up the word reading from keyboard
+     */
+    public static int dictionarySearcher(Dictionary dict, String input) {
+        boolean found = false;
+        int indexResult = -1;
+        try {
+            for (int i = 0; i < dict.getDict().size(); i++) {
+                if  (dict.getDict().get(i).getTarget().equalsIgnoreCase(input)) {
+                    // Explain the input from the dictionary
+                    indexResult = i;
+                    // The word is founded so found = true
+                    found = true;
+                }
+            }
+            if (!found) {
+                // search for related words if they exist
+                //dictionarySearchRelate(dict, input);
+            }
+        } catch (Exception e) {
+            dictionaryApplication.catchingException(e);
+        }
+        return indexResult;
+    }
+    //End of region
 }

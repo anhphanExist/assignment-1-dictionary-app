@@ -1,4 +1,4 @@
-package dictionaryApplication;
+package dictionaryApplication.BasicDict;
 
 import java.util.Comparator;
 
