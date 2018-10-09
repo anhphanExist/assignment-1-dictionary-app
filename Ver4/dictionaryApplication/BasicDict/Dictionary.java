@@ -22,9 +22,8 @@ public class Dictionary {
     }
 
     // Sort the dictionary
-    public ArrayList<Word> sortDict() {
+    public void sortDict() {
         Collections.sort(dict, Word.getWordComparator());
-        return dict;
     }
 
 }
