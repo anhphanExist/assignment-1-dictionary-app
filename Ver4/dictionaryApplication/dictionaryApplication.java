@@ -12,17 +12,23 @@ import static dictionaryApplication.BasicDict.DictionaryManagement.insertFromFil
 public class dictionaryApplication extends Application {
     
     public static Dictionary dict = insertFromFile("src/dictionaryApplication/BasicDict/data.txt");
+    public static Stage window = null;
     
+    /**
+     * start the GUI Application
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent firstScene = FXMLLoader.load(getClass().getResource("Graphic/dictionaryApplication.fxml"));
-            primaryStage.setTitle("Simple Dictionary");
-            primaryStage.setScene(new Scene(firstScene, 800, 600));
-            primaryStage.setResizable(false);
-            primaryStage.show();
+            window = primaryStage;
+            window.setResizable(false);
+            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/dictionaryApplication.fxml"));
+            window.setTitle("Simple Dictionary");
+            window.setScene(new Scene(root));
+            window.show();
         } catch (Exception e) {
-            System.out.println(e.getClass().getSimpleName() + " " + e.getMessage());
+            catchingException(e);
         }
     }
 
