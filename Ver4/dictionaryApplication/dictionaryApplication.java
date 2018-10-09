@@ -1,19 +1,24 @@
 package dictionaryApplication;
 
+import dictionaryApplication.BasicDict.Dictionary;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class dictionaryApplication extends Application {
+import static dictionaryApplication.BasicDict.DictionaryManagement.insertFromFile;
 
+public class dictionaryApplication extends Application {
+    
+    public static Dictionary dict = insertFromFile("src/dictionaryApplication/BasicDict/data.txt");
+    
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Graphic/dictionaryApplication.fxml"));
+            Parent firstScene = FXMLLoader.load(getClass().getResource("Graphic/dictionaryApplication.fxml"));
             primaryStage.setTitle("Simple Dictionary");
-            primaryStage.setScene(new Scene(root, 800, 600));
+            primaryStage.setScene(new Scene(firstScene, 800, 600));
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (Exception e) {
