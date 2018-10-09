@@ -1,8 +1,14 @@
 package dictionaryApplication.BasicDict;
 
 import dictionaryApplication.dictionaryApplication;
+import javafx.collections.FXCollections;
+import javafx.scene.control.ListView;
 
 import java.io.*;
+import java.util.ArrayList;
+
+import static dictionaryApplication.dictionaryApplication.catchingException;
+import static dictionaryApplication.dictionaryApplication.dict;
 
 public class DictionaryManagement {
     
@@ -75,14 +81,17 @@ public class DictionaryManagement {
         return res;
     }
     //endregion
-
-    //region searching Function
+    
+    //region Search Function
+    
     /**
+     * Looking up the word reading from keyboard
      * @param dict current dictionary
      * @param input search word from input
-     * Looking up the word reading from keyboard
+     * @param relatedTarget a list view variable for GUI
+     * @return the index to the target in dictionary
      */
-    public static int dictionarySearcher(Dictionary dict, String input) {
+    public static int dictionarySearcher(Dictionary dict, String input, ListView<String> relatedTarget) {
         boolean found = false;
         int indexResult = -1;
         try {
@@ -96,12 +105,34 @@ public class DictionaryManagement {
             }
             if (!found) {
                 // search for related words if they exist
-                //dictionarySearchRelate(dict, input);
+                relatedTarget.setItems(FXCollections.observableArrayList(dictionarySearchRelate(dict, input)));
             }
         } catch (Exception e) {
             dictionaryApplication.catchingException(e);
         }
         return indexResult;
     }
-    //End of region
+    
+    /**
+     * Search for related words
+     * @param dict current dictionary
+     * @param searchString the search input
+     * @return ArrayList result
+     */
+    public static ArrayList<String> dictionarySearchRelate(Dictionary dict, String searchString) {
+        // Init an array list to store result
+        ArrayList<String> relatedTarget = new ArrayList<>();
+        try {
+            // loop through current dictionary and add related words to arraylist
+            for (Word curWord : dict.getDict()) {
+                if (curWord.getTarget().toLowerCase().indexOf(searchString.toLowerCase()) == 0) {
+                    relatedTarget.add(curWord.getTarget());
+                }
+            }
+        } catch (Exception e) {
+            catchingException(e);
+        }
+        return relatedTarget;
+    }
+    //endregion
 }
