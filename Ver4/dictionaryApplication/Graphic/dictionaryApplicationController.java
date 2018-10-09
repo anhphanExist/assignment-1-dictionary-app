@@ -1,35 +1,41 @@
 package dictionaryApplication.Graphic;
 
-import dictionaryApplication.BasicDict.Dictionary;
 import dictionaryApplication.BasicDict.DictionaryManagement;
 import dictionaryApplication.BasicDict.Word;
-import dictionaryApplication.dictionaryApplication;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.textfield.TextFields;
 
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static dictionaryApplication.dictionaryApplication.dict;
+
 public class dictionaryApplicationController implements Initializable {
-    Dictionary dict = DictionaryManagement.insertFromFile("src/dictionaryApplication/BasicDict/data.txt");
-    @FXML
-    public TextField input;
-    @FXML
-    public Label explainLabel,relatedLabel;
+    
+    @FXML public TextField input;
+    @FXML public Label explainLabel;
+    @FXML public ListView<String> relatedTarget;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        String[] possibleTarget = new String[10000];
+    
+        ArrayList<String> possibleTarget = new ArrayList<>();
         for (int i = 0; i < dict.getSize(); i++) {
-            possibleTarget[i] = dict.getDict().get(i).getTarget();
+            possibleTarget.add(dict.getDict().get(i).getTarget());
         }
-        
+        ObservableList<String> targetForListView = FXCollections.observableArrayList(possibleTarget);
+        relatedTarget.setItems(targetForListView);
+    
         TextFields.bindAutoCompletion(input, possibleTarget);
     }
 
@@ -40,8 +46,8 @@ public class dictionaryApplicationController implements Initializable {
             textSet = "MAY CHUA NHAP TU MA CON NGU";
         }
         else {
-            if (DictionaryManagement.dictionarySearcher(dict,searchingInput) != -1) {
-                int indexSearch = DictionaryManagement.dictionarySearcher(dict,searchingInput);
+            if (DictionaryManagement.dictionarySearcher(dict, searchingInput, relatedTarget) != -1) {
+                int indexSearch = DictionaryManagement.dictionarySearcher(dict, searchingInput, relatedTarget);
                 Word inputWord = dict.getDict().get(indexSearch);
                 textSet = inputWord.getExplain();
             }
@@ -51,5 +57,16 @@ public class dictionaryApplicationController implements Initializable {
             }
         }
         explainLabel.setText(textSet);
+    }
+    
+    /**
+     * Close window
+     * @param event
+     */
+    public void handleMenuItemClose(ActionEvent event) {
+        // Exit user inteface
+        Platform.exit();
+        // Exit system
+        System.exit(0);
     }
 }
