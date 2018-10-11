@@ -7,6 +7,9 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionaryApplication.Graphic.dictionaryApplicationController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionaryApplication.Graphic.dictionaryApplicationController">
    <top>
       <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
         <menus>
@@ -25,11 +28,11 @@
               <MenuItem mnemonicParsing="false" onAction="#handleMenuItemClose" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Action">
             <items>
                   <MenuItem fx:id="menuItemAdd" mnemonicParsing="false" onAction="#handleMenuItemAdd" text="Add" />
-                  <MenuItem mnemonicParsing="false" text="Edit" />
-              <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem fx:id="menuItemEdit" mnemonicParsing="false" onAction="#handleMenuItemEdit" text="Edit" />
+              <MenuItem fx:id="menuItemDelete" mnemonicParsing="false" onAction="#handleMenuItemDelete" text="Delete" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -45,30 +48,47 @@
          <children>
             <VBox prefHeight="556.0" prefWidth="500.0">
                <children>
-                  <Label alignment="BOTTOM_CENTER" prefHeight="183.0" prefWidth="500.0" text="Phan Anh and Tuan Dat Dictionary" textAlignment="CENTER">
+                  <Label alignment="BOTTOM_CENTER" prefHeight="183.0" prefWidth="500.0" text="Phan Anh and Tuan Dat Dictionary" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="17.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="input" prefHeight="48.0" prefWidth="500.0" />
-                  <HBox prefHeight="25.0" prefWidth="500.0">
+                  <TextField fx:id="input" prefHeight="48.0" prefWidth="500.0" promptText="Enter Search">
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow color="WHITE" />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect></TextField>
+                  <Region prefHeight="37.0" prefWidth="500.0" />
+                  <AnchorPane prefHeight="25.0" prefWidth="500.0">
                      <children>
-                        <Region prefHeight="46.0" prefWidth="100.0" />
-                        <Button fx:id="searchButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="26.0" prefWidth="140.0" text="Search" />
-                        <Region prefHeight="46.0" prefWidth="20.0" />
-                        <Button fx:id="luckyButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="I'm Feeling Lucky" />
-                        <Region prefHeight="46.0" prefWidth="100.0" />
+                        <Button fx:id="searchButton" alignment="CENTER" layoutX="26.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="27.0" prefWidth="160.0" style="-fx-background-color: orange;" text="Search" />
+                        <Button fx:id="luckyButton" layoutX="322.0" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: orange;" text="I'm Feeling Lucky" />
                      </children>
-                  </HBox>
-                  <Region prefHeight="78.0" prefWidth="500.0" />
+                  </AnchorPane>
                   <HBox prefHeight="342.0" prefWidth="500.0">
                      <children>
                         <Pane prefHeight="188.0" prefWidth="211.0">
                            <children>
                               <AnchorPane layoutX="1.0" prefHeight="293.0" prefWidth="200.0">
                                  <children>
-                                    <Label fx:id="explainLabel" alignment="TOP_CENTER" layoutX="1.0" layoutY="46.0" prefHeight="227.0" prefWidth="202.0" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" />
-                                    <Label alignment="CENTER" layoutX="54.0" layoutY="4.0" prefHeight="17.0" prefWidth="91.0" text="Meaning">
+                                    <Label fx:id="explainLabel" alignment="TOP_LEFT" layoutY="40.0" prefHeight="227.0" prefWidth="202.0" style="-fx-background-color: white;" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                                       <effect>
+                                          <Lighting>
+                                             <bumpInput>
+                                                <Shadow />
+                                             </bumpInput>
+                                             <light>
+                                                <Light.Distant />
+                                             </light>
+                                          </Lighting>
+                                       </effect></Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="56.0" layoutY="14.0" prefHeight="17.0" prefWidth="91.0" text="Meaning" textAlignment="CENTER" textFill="#fcfcfc">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font></Label>
@@ -81,12 +101,22 @@
                            <children>
                               <AnchorPane layoutX="8.0" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Label layoutX="51.0" layoutY="4.0" text="Related Words">
+                                    <Label contentDisplay="CENTER" layoutX="52.0" layoutY="14.0" text="Related Words" textFill="#f8f8f8">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <ListView fx:id="relatedTarget" layoutY="44.0" prefHeight="226.0" prefWidth="200.0" />
+                                    <ListView fx:id="relatedTarget" layoutX="1.0" layoutY="41.0" prefHeight="226.0" prefWidth="200.0">
+                                       <effect>
+                                          <Lighting>
+                                             <bumpInput>
+                                                <Shadow />
+                                             </bumpInput>
+                                             <light>
+                                                <Light.Distant />
+                                             </light>
+                                          </Lighting>
+                                       </effect></ListView>
                                  </children>
                               </AnchorPane>
                            </children>
@@ -108,7 +138,7 @@
       <HBox BorderPane.alignment="CENTER">
          <children>
             <Region prefHeight="18.0" prefWidth="442.0" HBox.hgrow="ALWAYS" />
-            <Label prefHeight="18.0" prefWidth="190.0" text="Phan Anh and Tuan Dat Production" HBox.hgrow="ALWAYS" />
+            <Label prefHeight="18.0" prefWidth="222.0" text="Phan Anh and Tuan Dat Production" textFill="WHITE" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </bottom>

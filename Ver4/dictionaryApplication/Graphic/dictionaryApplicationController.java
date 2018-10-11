@@ -37,7 +37,7 @@ public class dictionaryApplicationController implements Initializable {
     @FXML public Button luckyButton;
     @FXML public Label explainLabel;
     @FXML public ListView<String> relatedTarget;
-    @FXML public MenuItem menuItemAdd;
+    @FXML public MenuItem menuItemAdd, menuItemEdit, menuItemDelete;
     @FXML public MenuBar menuBar;
     //endregion
     
@@ -106,7 +106,37 @@ public class dictionaryApplicationController implements Initializable {
             catchingException(e);
         }
     }
-    
+
+    /**
+     * handle menu item "Edit"
+     * @param actionEvent
+     */
+    public void handleMenuItemEdit(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/editWord.fxml"));
+            window.setScene(new Scene(root));
+            window.show();
+        }
+        catch (Exception e) {
+            catchingException(e);
+        }
+    }
+
+    /**
+     * handle menu item "Delete"
+     * @param actionEvent
+     */
+    public void handleMenuItemDelete(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/deleteWord.fxml"));
+            window.setScene(new Scene(root));
+            window.show();
+        }
+        catch (Exception e) {
+            catchingException(e);
+        }
+    }
+
     /**
      * Close window
      * @param event
@@ -119,6 +149,4 @@ public class dictionaryApplicationController implements Initializable {
         System.exit(0);
     }
     //endregion
-    
-    
 }

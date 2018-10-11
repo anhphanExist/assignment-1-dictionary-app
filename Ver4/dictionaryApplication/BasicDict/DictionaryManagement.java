@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.ListView;
 
 import java.io.*;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import static dictionaryApplication.dictionaryApplication.catchingException;
@@ -81,7 +82,9 @@ public class DictionaryManagement {
         return res;
     }
     //endregion
-    
+
+
+
     //region Search Function
     
     /**
