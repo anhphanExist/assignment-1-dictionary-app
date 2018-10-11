@@ -1,4 +1,4 @@
-package dictionaryApplication.Graphic;
+package dictionaryApplication.Graphic.folderController;
 
 import dictionaryApplication.BasicDict.Word;
 import javafx.event.ActionEvent;
@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -60,7 +59,7 @@ public class addWordController implements Initializable {
     @FXML
     public void cancelAddWord(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/dictionaryApplication.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/FXML/dictionaryApplication.fxml"));
             window.setScene(new Scene(root));
             window.show();
         } catch (Exception e) {

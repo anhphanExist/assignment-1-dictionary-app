@@ -1,4 +1,4 @@
-package dictionaryApplication.Graphic;
+package dictionaryApplication.Graphic.folderController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,7 +32,7 @@ public class editWordController implements Initializable {
     @FXML
     public void handleCancelButton(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/dictionaryApplication.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/FXML/dictionaryApplication.fxml"));
             window.setScene(new Scene(root));
             window.show();
         } catch (Exception e) {

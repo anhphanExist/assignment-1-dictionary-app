@@ -1,7 +1,5 @@
-package dictionaryApplication.Graphic;
+package dictionaryApplication.Graphic.folderController;
 
-import dictionaryApplication.BasicDict.DictionaryManagement;
-import dictionaryApplication.BasicDict.Word;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,7 +53,7 @@ public class deleteWordController implements Initializable {
     @FXML
     public void handleCancelButton(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/dictionaryApplication.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/FXML/dictionaryApplication.fxml"));
             window.setScene(new Scene(root));
             window.show();
         } catch (Exception e) {
