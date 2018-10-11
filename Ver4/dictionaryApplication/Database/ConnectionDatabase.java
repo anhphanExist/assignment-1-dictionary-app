@@ -5,23 +5,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionDatabase {
-
-    public Connection connection;
-
     public Connection getConnection() {
-
-        String dbName = "Batman";
-        String userName = "root";
-        String passWord = "";
-
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/"
-                    +dbName+userName+passWord);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            Class.forName("org.sqlite.JDBC");
+            String url = "jdbc:sqlite:src/dictionaryApplication/Database/dict_hh.db";
+            return DriverManager.getConnection(url);
         }
-
-        return null;
+        catch (Exception e) {
+            dictionaryApplication.dictionaryApplication.catchingException(e);
+            return null;
+        }
     }
 }

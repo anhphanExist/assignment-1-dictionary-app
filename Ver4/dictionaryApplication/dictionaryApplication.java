@@ -7,11 +7,23 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
+import static dictionaryApplication.BasicDict.DictionaryManagement.insertFromDatabase;
 import static dictionaryApplication.BasicDict.DictionaryManagement.insertFromFile;
 
 public class dictionaryApplication extends Application {
     
-    public static Dictionary dict = insertFromFile("src/dictionaryApplication/BasicDict/data.txt");
+    //public static Dictionary dict = insertFromFile("src/dictionaryApplication/BasicDict/data.txt");
+    public static Dictionary dict;
+    static {
+        try {
+            dict = insertFromDatabase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static Stage window = null;
     
     /**
@@ -23,7 +35,7 @@ public class dictionaryApplication extends Application {
         try {
             window = primaryStage;
             window.setResizable(false);
-            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/dictionaryApplication.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/FXML/dictionaryApplication.fxml"));
             window.setTitle("Simple Dictionary");
             window.setScene(new Scene(root));
             window.show();

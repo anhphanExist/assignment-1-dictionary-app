@@ -77,7 +77,7 @@
                            <children>
                               <AnchorPane layoutX="1.0" prefHeight="293.0" prefWidth="200.0">
                                  <children>
-                                    <Label fx:id="explainLabel" alignment="TOP_LEFT" layoutY="40.0" prefHeight="227.0" prefWidth="202.0" style="-fx-background-color: white;" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                                    <Label fx:id="explainLabel" alignment="TOP_LEFT" layoutY="40.0" prefHeight="227.0" prefWidth="202.0" style="-fx-background-color: white;" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                                        <effect>
                                           <Lighting>
                                              <bumpInput>

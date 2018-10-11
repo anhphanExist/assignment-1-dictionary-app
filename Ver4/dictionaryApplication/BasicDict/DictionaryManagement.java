@@ -1,11 +1,15 @@
 package dictionaryApplication.BasicDict;
 
+import dictionaryApplication.Database.ConnectionDatabase;
 import dictionaryApplication.dictionaryApplication;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ListView;
 
 import java.io.*;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import static dictionaryApplication.dictionaryApplication.catchingException;
@@ -80,6 +84,28 @@ public class DictionaryManagement {
             dictionaryApplication.catchingException(e);
         }
         return res;
+    }
+    /**
+     * insert dictionary from Database
+     * @return new dictionary gather from database
+     */
+    public static Dictionary insertFromDatabase() throws SQLException {
+        Dictionary dict = new Dictionary();
+
+        ConnectionDatabase connectionDatabase = new ConnectionDatabase();
+        Connection connection = connectionDatabase.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery("select  * from av;");
+
+        while ((rs.next())) {
+            Word newWord = new Word();
+            newWord.setTarget(rs.getString(2));
+            newWord.setExplain(rs.getString(4));
+            dict.addDict(newWord);
+        }
+        dict.sortDict();
+        System.out.println("ADD SUCCESS!");
+        return dict;
     }
     //endregion
 

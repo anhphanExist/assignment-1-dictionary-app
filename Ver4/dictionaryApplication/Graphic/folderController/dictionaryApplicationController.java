@@ -70,7 +70,7 @@ public class dictionaryApplicationController implements Initializable {
         String textSet = new String();
         String searchingInput = input.getText();
         if (searchingInput.isEmpty()){
-            textSet = "MAY CHUA NHAP TU MA CON NGU";
+            textSet = "Chưa nhập từ à ";
         }
         else {
             if (DictionaryManagement.dictionarySearcher(dict, searchingInput, relatedTarget) != -1) {
@@ -80,7 +80,7 @@ public class dictionaryApplicationController implements Initializable {
             }
 
             else {
-                textSet = "DEO CO TU NAY TRONG TU DIEN";
+                textSet = "Không có đâu";
             }
         }
         explainLabel.setText(textSet);
@@ -144,4 +144,5 @@ public class dictionaryApplicationController implements Initializable {
         System.exit(0);
     }
     //endregion
+
 }
