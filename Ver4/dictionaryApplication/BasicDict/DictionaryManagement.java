@@ -136,6 +136,9 @@ public class DictionaryManagement {
                 // search for related words if they exist
                 relatedTarget.setItems(FXCollections.observableArrayList(dictionarySearchRelate(dict, input)));
             }
+            else {
+                relatedTarget.setItems(null);
+            }
         } catch (Exception e) {
             dictionaryApplication.catchingException(e);
         }
