@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="166.0" prefWidth="370.0" style="-fx-background-color: #3D4956#3D4956;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionaryApplication.Graphic.folderController.alertBoxController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="31.0" prefHeight="52.0" prefWidth="270.0" text="Action Success" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Button layoutX="88.0" layoutY="125.0" mnemonicParsing="false" onAction="#alertClose" prefHeight="27.0" prefWidth="195.0" style="-fx-background-color: orange;" text="Close" />
+   </children>
+</AnchorPane>

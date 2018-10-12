@@ -68,7 +68,7 @@ public class dictionaryApplicationController implements Initializable {
     @FXML
     public void handleSearchButton(ActionEvent actionEvent) {
         String textSet = new String();
-        String searchingInput = input.getText();
+        String searchingInput = Word.standardizeString(input.getText());
         if (searchingInput.isEmpty()){
             textSet = "Chưa nhập từ à ";
         }
@@ -144,5 +144,4 @@ public class dictionaryApplicationController implements Initializable {
         System.exit(0);
     }
     //endregion
-
 }

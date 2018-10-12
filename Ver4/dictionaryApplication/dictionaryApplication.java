@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
@@ -58,6 +59,22 @@ public class dictionaryApplication extends Application {
         for (Throwable t: e.getSuppressed()) {
             System.out.println("Surpress: " + t.getMessage());
         }
+    }
+    //endregion
+
+    //region showing alert
+    /**
+     * Showing alert window
+     */
+    public static void showAlert(String message) {
+        /**
+         * Test message
+         */
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Alert");
+        alert.setHeaderText("Notification");
+        alert.setContentText(message);
+        alert.show();
     }
     //endregion
 }

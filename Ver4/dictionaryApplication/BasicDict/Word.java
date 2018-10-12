@@ -8,7 +8,7 @@ public class Word {
 
     //Set + get Target
     public void setTarget(String _target) {
-        this.target = _target;
+        this.target = standardizeString(_target);
     }
     public String getTarget() {
         return this.target;
@@ -16,10 +16,20 @@ public class Word {
 
     //Set + get Explain
     public void setExplain(String _explain) {
-        this.explain = _explain;
+        this.explain = standardizeString(_explain);
     }
     public String getExplain() {
         return this.explain;
+    }
+
+    /**
+     * Standardize the input
+     * @return the Standard String
+     */
+    public static String standardizeString(String str) {
+        str = str.trim();
+        str = str.replaceAll("\\s+"," ");
+        return str;
     }
 
     /**

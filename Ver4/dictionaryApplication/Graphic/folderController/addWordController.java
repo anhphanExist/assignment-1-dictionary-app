@@ -1,5 +1,6 @@
 package dictionaryApplication.Graphic.folderController;
 
+import dictionaryApplication.BasicDict.DictionaryManagement;
 import dictionaryApplication.BasicDict.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,15 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static dictionaryApplication.dictionaryApplication.catchingException;
-import static dictionaryApplication.dictionaryApplication.dict;
-import static dictionaryApplication.dictionaryApplication.window;
+import static dictionaryApplication.dictionaryApplication.*;
 
 public class addWordController implements Initializable {
     
@@ -45,13 +45,28 @@ public class addWordController implements Initializable {
      */
     @FXML
     public void saveAddWord(ActionEvent event) {
-        Word newWord = new Word();
-        newWord.setTarget(targetAdd.getText().toLowerCase());
-        newWord.setExplain(explainAdd.getText());
-        dict.addDict(newWord);
+        try {
+            Word newWord = new Word();
+            newWord.setTarget(targetAdd.getText().toLowerCase());
+            newWord.setExplain(explainAdd.getText());
+            if (newWord.getTarget().isEmpty() || newWord.getExplain().isEmpty()) {
+                showAlert("ADD FAILED!");
+            }
+            else if (DictionaryManagement.dictionarySearcher(dict, newWord.getTarget(),null) != -1) {
+                showAlert("This world is currently at dictionary!");
+            }
+            else {
+                showAlert("ADD SUCCESS!");
+                dict.addDict(newWord);
+            }
+        }
+        catch (Exception e) {
+            showAlert("ADD FAILED!");
+            catchingException(e);
+        }
         dict.sortDict();
     }
-    
+
     /**
      * Cancel add word scene to go back to main scene
      * @param event

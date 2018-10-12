@@ -24,21 +24,30 @@
                         <Font size="15.0" />
                     </font>
                 </Label>
-                <TextField fx:id="targetEdit" promptText="sample">
-                    <VBox.margin>
-                        <Insets left="10.0" right="10.0" top="10.0" />
-                    </VBox.margin>
-               <effect>
-                  <Lighting>
-                     <bumpInput>
-                        <Shadow />
-                     </bumpInput>
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-                </TextField>
+            <HBox>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <children>
+                  <AnchorPane prefHeight="27.0" prefWidth="780.0">
+                     <children>
+                            <TextField fx:id="targetEdit" layoutX="123.0" prefHeight="27.0" prefWidth="197.0" promptText="sample">
+                           <effect>
+                              <Lighting>
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    <Light.Distant />
+                                 </light>
+                              </Lighting>
+                           </effect>
+                            </TextField>
+                        <Button layoutX="463.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="197.0" style="-fx-background-color: orange;" text="Search" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
                 <Label prefHeight="18.0" prefWidth="812.0" text="Edit explain:" textFill="WHITE">
                     <VBox.margin>
                         <Insets left="10.0" right="10.0" top="10.0" />
@@ -47,24 +56,44 @@
                         <Font size="15.0" />
                     </font>
                 </Label>
-                <TextField fx:id="explainEdit" alignment="TOP_LEFT" layoutX="20.0" layoutY="110.0" prefHeight="369.0" prefWidth="779.0" promptText="sample explain">
-                    <VBox.margin>
-                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-                    </VBox.margin>
-               <effect>
-                  <Lighting>
-                     <bumpInput>
-                        <Shadow />
-                     </bumpInput>
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-                </TextField>
+            <HBox prefHeight="277.0" prefWidth="780.0">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                            <TextField fx:id="explainEdit" alignment="TOP_LEFT" layoutX="462.0" prefHeight="254.0" prefWidth="197.0" promptText="Enter Explain">
+                           <effect>
+                              <Lighting>
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    <Light.Distant />
+                                 </light>
+                              </Lighting>
+                           </effect>
+                            </TextField>
+                        <Label alignment="TOP_LEFT" layoutX="122.0" layoutY="2.0" prefHeight="252.0" prefWidth="197.0" style="-fx-background-color: white;">
+                           <effect>
+                              <Lighting>
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                 <light>
+                                    <Light.Distant />
+                                 </light>
+                              </Lighting>
+                           </effect>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                        <Button fx:id="saveButton" layoutX="81.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="64.0" prefWidth="272.0" style="-fx-background-color: orange;" text="Save">
+                        <Button fx:id="saveButton" layoutX="81.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="64.0" prefWidth="272.0" style="-fx-background-color: orange;" text="Update">
                             <font>
                                 <Font size="20.0" />
                             </font>
