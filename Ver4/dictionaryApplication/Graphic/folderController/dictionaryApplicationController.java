@@ -2,6 +2,7 @@ package dictionaryApplication.Graphic.folderController;
 
 import dictionaryApplication.BasicDict.DictionaryManagement;
 import dictionaryApplication.BasicDict.Word;
+import dictionaryApplication.textToSpeech.TextToSpeech;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -86,6 +87,16 @@ public class dictionaryApplicationController implements Initializable {
         explainLabel.setText(textSet);
     }
     
+    @FXML
+    public void handleSpeakButton(ActionEvent event) {
+        TextToSpeech tts = new TextToSpeech();
+        
+        tts.setVoice("cmu-slt-hsmm");
+        if (!input.getText().equals("")) {
+            tts.speak(input.getText(), 2.0f, false, false);
+        }
+    }
+    
     /**
      * handle menu item "add"
      * @param event
@@ -142,6 +153,18 @@ public class dictionaryApplicationController implements Initializable {
         Platform.exit();
         // Exit system
         System.exit(0);
+    }
+    
+    @FXML
+    public void handleMenuItemGoogleTranslate(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/FXML/googleTranslate.fxml"));
+            window.setScene(new Scene(root));
+            window.show();
+        }
+        catch (Exception e) {
+            catchingException(e);
+        }
     }
     //endregion
 }
