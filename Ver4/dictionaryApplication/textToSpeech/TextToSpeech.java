@@ -1,4 +1,4 @@
-package sample;
+package dictionaryApplication.textToSpeech;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
