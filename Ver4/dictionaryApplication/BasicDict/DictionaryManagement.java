@@ -3,6 +3,7 @@ package dictionaryApplication.BasicDict;
 import dictionaryApplication.Database.ConnectionDatabase;
 import dictionaryApplication.dictionaryApplication;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
 import java.io.*;
@@ -134,10 +135,11 @@ public class DictionaryManagement {
             }
             if (!found) {
                 // search for related words if they exist
+                indexResult = -2;
                 relatedTarget.setItems(FXCollections.observableArrayList(dictionarySearchRelate(dict, input)));
             }
             else {
-                relatedTarget.setItems(null);
+                relatedTarget.setItems(FXCollections.observableArrayList(dict.getDict().get(indexResult).getTarget()));
             }
         } catch (Exception e) {
             dictionaryApplication.catchingException(e);
@@ -165,6 +167,22 @@ public class DictionaryManagement {
             catchingException(e);
         }
         return relatedTarget;
+    }
+    
+    /**
+     * Find all the reference of the target to the words in dictionary
+     * @param stringArrayList the arraylist of target to search in dictionary
+     * @return
+     */
+    public static ArrayList<Word> listSearch(ArrayList<String> stringArrayList) {
+        ArrayList<Word> res = new ArrayList<>();
+        for (Word curWord : dict.getDict()) {
+            for (String curString : stringArrayList)
+            if (curWord.getTarget().equalsIgnoreCase(curString)) {
+                res.add(curWord);
+            }
+        }
+        return res;
     }
     //endregion
 }

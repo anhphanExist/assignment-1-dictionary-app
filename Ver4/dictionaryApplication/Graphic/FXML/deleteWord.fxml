@@ -57,7 +57,7 @@
             <Region prefHeight="58.0" prefWidth="800.0" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button layoutX="81.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="64.0" prefWidth="272.0" style="-fx-background-color: orange;" text="Delete">
+                  <Button fx:id="deleteButton" layoutX="81.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="64.0" prefWidth="272.0" style="-fx-background-color: orange;" text="Delete">
                      <font>
                         <Font size="20.0" />
                      </font>

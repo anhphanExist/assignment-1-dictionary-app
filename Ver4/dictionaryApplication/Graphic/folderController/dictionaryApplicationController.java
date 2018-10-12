@@ -52,8 +52,8 @@ public class dictionaryApplicationController implements Initializable {
             possibleTarget.add(dict.getDict().get(i).getTarget());
         }
         // Set possible target to list view using observable list
-        ObservableList<String> targetForListView = FXCollections.observableArrayList(possibleTarget);
-        relatedTarget.setItems(targetForListView);
+//        ObservableList<String> targetForListView = FXCollections.observableArrayList(possibleTarget);
+//        relatedTarget.setItems(targetForListView);
         
         // Bind auto complete textfield
         TextFields.bindAutoCompletion(input, possibleTarget);
@@ -70,16 +70,16 @@ public class dictionaryApplicationController implements Initializable {
     public void handleSearchButton(ActionEvent actionEvent) {
         String textSet = new String();
         String searchingInput = Word.standardizeString(input.getText());
-        if (searchingInput.isEmpty()){
+        if (searchingInput.isEmpty()) {
             textSet = "Chưa nhập từ à ";
         }
         else {
-            if (DictionaryManagement.dictionarySearcher(dict, searchingInput, relatedTarget) != -1) {
-                int indexSearch = DictionaryManagement.dictionarySearcher(dict, searchingInput, relatedTarget);
+            int indexSearch = DictionaryManagement.dictionarySearcher(dict, searchingInput, relatedTarget);
+            if (indexSearch != -1 && indexSearch != -2) {
                 Word inputWord = dict.getDict().get(indexSearch);
                 textSet = inputWord.getExplain();
+                relatedTarget.setItems(null);
             }
-
             else {
                 textSet = "Không có đâu";
             }
