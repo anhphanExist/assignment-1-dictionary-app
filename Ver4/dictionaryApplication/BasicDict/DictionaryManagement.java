@@ -136,10 +136,14 @@ public class DictionaryManagement {
             if (!found) {
                 // search for related words if they exist
                 indexResult = -2;
-                relatedTarget.setItems(FXCollections.observableArrayList(dictionarySearchRelate(dict, input)));
+                if (relatedTarget != null) {
+                    relatedTarget.setItems(FXCollections.observableArrayList(dictionarySearchRelate(dict, input)));
+                }
             }
             else {
-                relatedTarget.setItems(FXCollections.observableArrayList(dict.getDict().get(indexResult).getTarget()));
+                if (relatedTarget != null) {
+                    relatedTarget.setItems(FXCollections.observableArrayList(dict.getDict().get(indexResult).getTarget()));
+                }
             }
         } catch (Exception e) {
             dictionaryApplication.catchingException(e);

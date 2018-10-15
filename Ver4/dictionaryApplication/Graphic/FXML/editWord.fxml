@@ -31,7 +31,7 @@
                <children>
                   <AnchorPane prefHeight="27.0" prefWidth="780.0">
                      <children>
-                            <TextField fx:id="targetEdit" layoutX="123.0" prefHeight="27.0" prefWidth="197.0" promptText="sample">
+                            <TextField fx:id="searchEdit" layoutX="123.0" prefHeight="27.0" prefWidth="197.0" promptText="sample">
                            <effect>
                               <Lighting>
                                  <bumpInput>
@@ -43,7 +43,7 @@
                               </Lighting>
                            </effect>
                             </TextField>
-                        <Button layoutX="463.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="197.0" style="-fx-background-color: orange;" text="Search" />
+                        <Button fx:id="searchButton" layoutX="463.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="27.0" prefWidth="197.0" style="-fx-background-color: orange;" text="Search" />
                      </children>
                   </AnchorPane>
                </children>
@@ -75,7 +75,7 @@
                               </Lighting>
                            </effect>
                             </TextField>
-                        <Label alignment="TOP_LEFT" layoutX="122.0" layoutY="2.0" prefHeight="252.0" prefWidth="197.0" style="-fx-background-color: white;">
+                        <Label fx:id="curExplain" alignment="TOP_LEFT" layoutX="122.0" layoutY="2.0" prefHeight="252.0" prefWidth="197.0" style="-fx-background-color: white;" wrapText="true">
                            <effect>
                               <Lighting>
                                  <bumpInput>

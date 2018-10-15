@@ -20,10 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
-import static dictionaryApplication.dictionaryApplication.catchingException;
-import static dictionaryApplication.dictionaryApplication.window;
-import static dictionaryApplication.dictionaryApplication.dict;
+import static dictionaryApplication.dictionaryApplication.*;
 
 public class dictionaryApplicationController implements Initializable {
     
@@ -71,7 +68,7 @@ public class dictionaryApplicationController implements Initializable {
         String textSet = new String();
         String searchingInput = Word.standardizeString(input.getText());
         if (searchingInput.isEmpty()) {
-            textSet = "Chưa nhập từ à ";
+            showAlert("YOU HAVEN'T TYPE ANYTHING TO SEARCH YET !!");
         }
         else {
             int indexSearch = DictionaryManagement.dictionarySearcher(dict, searchingInput, relatedTarget);
@@ -81,7 +78,8 @@ public class dictionaryApplicationController implements Initializable {
                 relatedTarget.setItems(null);
             }
             else {
-                textSet = "Không có đâu";
+                showAlert("WORD NOT FOUND !!");
+                textSet = "WORD NOT FOUND !!";
             }
         }
         explainLabel.setText(textSet);
