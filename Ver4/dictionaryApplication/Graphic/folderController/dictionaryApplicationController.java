@@ -72,9 +72,8 @@ public class dictionaryApplicationController implements Initializable {
         }
         else {
             int indexSearch = DictionaryManagement.dictionarySearcher(dict, searchingInput, relatedTarget);
-            if (indexSearch != -1 && indexSearch != -2) {
-                Word inputWord = dict.getDict().get(indexSearch);
-                textSet = inputWord.getExplain();
+            if (indexSearch != -1) {
+                textSet = dict.getDict().get(indexSearch).getExplain();
                 relatedTarget.setItems(null);
             }
             else {

@@ -115,6 +115,38 @@ public class DictionaryManagement {
     //region Search Function
     
     /**
+     * Optimizing the word search by using binary search algorithm
+     * @param dict current dictionary
+     * @param left index of the left being-searched subarray
+     * @param right index of the right being-searched subarray
+     * @param searchingTarget the word we want to search
+     * @return
+     */
+    private static int binaryWordSearch(Dictionary dict, int left, int right, String searchingTarget) {
+        if (right >= left) {
+            int mid = left + (right - left) / 2;
+            
+            // If the element is in the middle itself
+            // return it
+            if (dict.getDict().get(mid).getTarget().equalsIgnoreCase(searchingTarget)) {
+                return mid;
+            }
+            // Else if the element is in the left half
+            // continue calling binaryWordSearch in the left half
+            else if (dict.getDict().get(mid).getTarget().compareTo(searchingTarget) > 0) {
+                return binaryWordSearch(dict, left, mid - 1, searchingTarget);
+            }
+            // Else the element is in the right half
+            // continue calling binaryWordSearch in the right half
+            else {
+                return binaryWordSearch(dict, mid + 1, right, searchingTarget);
+            }
+        }
+        // If the element is not present then return -1
+        return -1;
+    }
+    
+    /**
      * Looking up the word reading from keyboard
      * @param dict current dictionary
      * @param input search word from input
@@ -125,22 +157,28 @@ public class DictionaryManagement {
         boolean found = false;
         int indexResult = -1;
         try {
-            for (int i = 0; i < dict.getDict().size(); i++) {
-                if  (dict.getDict().get(i).getTarget().equalsIgnoreCase(input)) {
-                    // Explain the input from the dictionary
-                    indexResult = i;
-                    // The word is founded so found = true
-                    found = true;
-                }
+//            for (int i = 0; i < dict.getDict().size(); i++) {
+//                if  (dict.getDict().get(i).getTarget().equalsIgnoreCase(input)) {
+//                    // Explain the input from the dictionary
+//                    indexResult = i;
+//                    // The word is founded so found = true
+//                    found = true;
+//                }
+//            }
+            // Search for the index of the target
+            indexResult = binaryWordSearch(dict, 0, dict.getSize() - 1, input);
+            if (indexResult != -1) {
+                found = true;
             }
             if (!found) {
                 // search for related words if they exist
-                indexResult = -2;
+                // If there is a list view then display related words
                 if (relatedTarget != null) {
                     relatedTarget.setItems(FXCollections.observableArrayList(dictionarySearchRelate(dict, input)));
                 }
             }
             else {
+                // Display the founded word in list view if there is any
                 if (relatedTarget != null) {
                     relatedTarget.setItems(FXCollections.observableArrayList(dict.getDict().get(indexResult).getTarget()));
                 }
