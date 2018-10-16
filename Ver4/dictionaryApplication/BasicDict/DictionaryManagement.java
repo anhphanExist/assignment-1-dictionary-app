@@ -97,12 +97,16 @@ public class DictionaryManagement {
         ConnectionDatabase connectionDatabase = new ConnectionDatabase();
         Connection connection = connectionDatabase.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery("select  * from av;");
+        ResultSet rs = statement.executeQuery("select  * from tbl_edict;");
 
         while ((rs.next())) {
             Word newWord = new Word();
             newWord.setTarget(rs.getString(2));
-            newWord.setExplain(rs.getString(4));
+            String temp = rs.getString(3);
+            temp = temp.replaceAll("<C><F><I><N><Q>", "\n      ");
+            temp = temp.replaceAll("<br />", "\n      ");
+            temp = temp.replaceAll("</Q></N></I></F></C>", "");
+            newWord.setExplain(temp);
             dict.addDict(newWord);
         }
         dict.sortDict();

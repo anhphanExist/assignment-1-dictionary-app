@@ -8,7 +8,7 @@ public class ConnectionDatabase {
     public Connection getConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:src/dictionaryApplication/Database/dict_hh.db";
+            String url = "jdbc:sqlite:src/dictionaryApplication/Database/dictionary.db";
             return DriverManager.getConnection(url);
         }
         catch (Exception e) {
