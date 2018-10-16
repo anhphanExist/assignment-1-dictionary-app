@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionaryApplication.Graphic.folderController.addWordController">
    <children>
-      <VBox layoutX="259.0" layoutY="129.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3D4956 #3D4956;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="259.0" layoutY="129.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #283E49#283E49 #283E49#283E49;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label prefHeight="18.0" prefWidth="789.0" text="Enter new word:" textFill="WHITE">
                <VBox.margin>
@@ -64,14 +64,14 @@
             </TextField>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="saveButton" layoutX="81.0" layoutY="29.0" mnemonicParsing="false" onAction="#saveAddWord" prefHeight="64.0" prefWidth="272.0" style="-fx-background-color: orange;" text="Save">
+                  <Button fx:id="saveButton" layoutX="177.0" layoutY="29.0" mnemonicParsing="false" onAction="#saveAddWord" prefHeight="27.0" prefWidth="160.0" style="-fx-background-color: #76B467#76B467 #76B467#76B467;" text="Save">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="cancelButton" layoutX="434.0" layoutY="29.0" mnemonicParsing="false" onAction="#cancelAddWord" prefHeight="64.0" prefWidth="272.0" style="-fx-background-color: orange;" text="Cancel">
+                  <Button fx:id="cancelButton" layoutX="478.0" layoutY="29.0" mnemonicParsing="false" onAction="#cancelAddWord" prefHeight="27.0" prefWidth="160.0" style="-fx-background-color: #CD5C5C#CD5C5C;" text="Cancel">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Button>
                </children>

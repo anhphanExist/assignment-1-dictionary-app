@@ -19,13 +19,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionaryApplication.Graphic.folderController.dictionaryApplicationController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #283E49#283E49;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionaryApplication.Graphic.folderController.dictionaryApplicationController">
    <top>
-      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+      <MenuBar fx:id="menuBar" blendMode="SRC_ATOP" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSaveButton" text="Save" />
                   <MenuItem mnemonicParsing="false" onAction="#handleMenuItemGoogleTranslate" text="Use Google Translate (need Internet)" />
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#handleMenuItemClose" text="Close" />
@@ -70,8 +70,14 @@
                   <Region prefHeight="37.0" prefWidth="500.0" />
                   <AnchorPane prefHeight="25.0" prefWidth="500.0">
                      <children>
-                        <Button fx:id="searchButton" alignment="CENTER" layoutX="26.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="27.0" prefWidth="160.0" style="-fx-background-color: orange;" text="Search" />
-                        <Button fx:id="luckyButton" layoutX="322.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleSpeakButton" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: orange;" text="Speak" />
+                        <Button fx:id="searchButton" alignment="CENTER" layoutX="24.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="27.0" prefWidth="160.0" style="-fx-background-color: #76B467#76B467;" text="Search">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font></Button>
+                        <Button fx:id="luckyButton" layoutX="318.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleSpeakButton" prefHeight="27.0" prefWidth="160.0" style="-fx-background-color: #76B467#76B467;" text="Speak">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
                      </children>
                   </AnchorPane>
                   <HBox prefHeight="342.0" prefWidth="500.0">
@@ -80,7 +86,7 @@
                            <children>
                               <AnchorPane layoutX="1.0" prefHeight="293.0" prefWidth="200.0">
                                  <children>
-                                    <Label fx:id="explainLabel" alignment="TOP_LEFT" layoutY="40.0" prefHeight="227.0" prefWidth="202.0" style="-fx-background-color: white;" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                                    <Label fx:id="explainLabel" alignment="TOP_LEFT" layoutX="1.0" layoutY="42.0" prefHeight="226.0" prefWidth="200.0" style="-fx-background-color: white;" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                                        <effect>
                                           <Lighting>
                                              <bumpInput>
@@ -102,14 +108,14 @@
                         <Region prefHeight="188.0" prefWidth="95.0" />
                         <Pane prefHeight="188.0" prefWidth="226.0">
                            <children>
-                              <AnchorPane layoutX="8.0" prefHeight="200.0" prefWidth="200.0">
+                              <AnchorPane layoutX="14.0" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Label contentDisplay="CENTER" layoutX="52.0" layoutY="14.0" text="Related Words" textFill="#f8f8f8">
+                                    <Label contentDisplay="CENTER" layoutX="56.0" layoutY="14.0" text="Related Words" textFill="#f8f8f8">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <ListView fx:id="relatedTarget" layoutX="1.0" layoutY="41.0" prefHeight="226.0" prefWidth="200.0">
+                                    <ListView fx:id="relatedTarget" layoutX="5.0" layoutY="42.0" prefHeight="226.0" prefWidth="200.0">
                                        <effect>
                                           <Lighting>
                                              <bumpInput>

@@ -2,6 +2,7 @@ package dictionaryApplication.Graphic.folderController;
 
 import dictionaryApplication.BasicDict.DictionaryManagement;
 import dictionaryApplication.BasicDict.Word;
+import dictionaryApplication.Database.ConnectionDatabase;
 import dictionaryApplication.textToSpeech.TextToSpeech;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -17,6 +18,9 @@ import org.controlsfx.control.textfield.TextFields;
 
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -158,6 +162,34 @@ public class dictionaryApplicationController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/FXML/googleTranslate.fxml"));
             window.setScene(new Scene(root));
             window.show();
+        }
+        catch (Exception e) {
+            catchingException(e);
+        }
+    }
+
+    /**
+     * save current dictionary to new Database file
+     * @param actionEvent
+     */
+    public void handleSaveButton(ActionEvent actionEvent) {
+        try {
+            ConnectionDatabase connectionDatabase = new ConnectionDatabase("jdbc:sqlite:src/dictionaryApplication/Database/saveDictionary.db");
+            Connection connection = connectionDatabase.getConnection();
+            PreparedStatement stm = connection.prepareStatement("DELETE FROM dict;VACUUM");
+            stm.executeUpdate();
+            String stmSTR = "INSERT INTO dict (idx, word, detail) VALUES (?,?,?)";
+            /**
+             * This loop need extremely high source of CPU :D
+             */
+            for (int i = 0; i < 1000 ; i++) {
+                stm = connection.prepareStatement(stmSTR);
+                stm.setString(1, String.valueOf(i));
+                stm.setString(2,dict.getDict().get(i).getTarget());
+                stm.setString(3,dict.getDict().get(i).getExplain());
+                stm.executeUpdate();
+            }
+            showAlert("Database saved successfully to saveDictionary.db!");
         }
         catch (Exception e) {
             catchingException(e);

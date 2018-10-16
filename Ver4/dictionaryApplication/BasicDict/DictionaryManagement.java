@@ -94,7 +94,7 @@ public class DictionaryManagement {
     public static Dictionary insertFromDatabase() throws SQLException {
         Dictionary dict = new Dictionary();
 
-        ConnectionDatabase connectionDatabase = new ConnectionDatabase();
+        ConnectionDatabase connectionDatabase = new ConnectionDatabase("jdbc:sqlite:src/dictionaryApplication/Database/dictionary.db");
         Connection connection = connectionDatabase.getConnection();
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery("select  * from tbl_edict;");

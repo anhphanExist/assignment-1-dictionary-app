@@ -43,7 +43,10 @@
                               </Lighting>
                            </effect>
                             </TextField>
-                        <Button fx:id="searchButton" layoutX="463.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="27.0" prefWidth="197.0" style="-fx-background-color: orange;" text="Search" />
+                        <Button fx:id="searchButton" layoutX="481.0" mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="27.0" prefWidth="160.0" style="-fx-background-color: orange;" text="Search">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
                      </children>
                   </AnchorPane>
                </children>
@@ -93,14 +96,14 @@
             </HBox>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                        <Button fx:id="saveButton" layoutX="81.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="64.0" prefWidth="272.0" style="-fx-background-color: orange;" text="Update">
+                        <Button fx:id="saveButton" layoutX="150.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="27.0" prefWidth="160.0" style="-fx-background-color: #76B467#76B467 #76B467#76B467;" text="Update">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="14.0" />
                             </font>
                         </Button>
-                        <Button fx:id="cancelButton" layoutX="434.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="64.0" prefWidth="272.0" style="-fx-background-color: orange;" text="Cancel">
+                        <Button fx:id="cancelButton" layoutX="493.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="27.0" prefWidth="160.0" style="-fx-background-color: #CD5C5C#CD5C5C #CD5C5C#CD5C5C;" text="Cancel">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="14.0" />
                             </font>
                         </Button>
                </children>
