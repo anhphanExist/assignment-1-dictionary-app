@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
@@ -25,7 +22,7 @@ import static dictionaryApplication.dictionaryApplication.*;
 public class editWordController implements Initializable {
     
     @FXML public TextField searchEdit;
-    @FXML public TextField explainEdit;
+    @FXML public TextArea explainEdit;
     @FXML public Label curExplain;
     @FXML public Button saveButton;
     @FXML public Button cancelButton;

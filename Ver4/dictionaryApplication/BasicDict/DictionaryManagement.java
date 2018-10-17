@@ -87,6 +87,8 @@ public class DictionaryManagement {
         return res;
     }
     //endregion
+    
+    //region Insert Data from Database
     /**
      * insert dictionary from Database
      * @return new dictionary gather from database
@@ -113,6 +115,7 @@ public class DictionaryManagement {
         System.out.println("ADD SUCCESS!");
         return dict;
     }
+    //endregion
 
 
 

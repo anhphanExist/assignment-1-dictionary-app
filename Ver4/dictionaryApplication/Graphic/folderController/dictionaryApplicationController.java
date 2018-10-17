@@ -88,6 +88,10 @@ public class dictionaryApplicationController implements Initializable {
         explainLabel.setText(textSet);
     }
     
+    /**
+     * Text To Speech Function
+     * @param event
+     */
     @FXML
     public void handleSpeakButton(ActionEvent event) {
         TextToSpeech tts = new TextToSpeech();
@@ -156,6 +160,10 @@ public class dictionaryApplicationController implements Initializable {
         System.exit(0);
     }
     
+    /**
+     * Google Translate API
+     * @param event
+     */
     @FXML
     public void handleMenuItemGoogleTranslate(ActionEvent event) {
         try {
