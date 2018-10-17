@@ -182,26 +182,15 @@ public class dictionaryApplicationController implements Initializable {
      */
     public void handleSaveButton(ActionEvent actionEvent) {
         try {
-            ConnectionDatabase connectionDatabase = new ConnectionDatabase("jdbc:sqlite:src/dictionaryApplication/Database/saveDictionary.db");
-            Connection connection = connectionDatabase.getConnection();
-            PreparedStatement stm = connection.prepareStatement("DELETE FROM dict;VACUUM");
-            stm.executeUpdate();
-            String stmSTR = "INSERT INTO dict (idx, word, detail) VALUES (?,?,?)";
-            /**
-             * This loop need extremely high source of CPU :D
-             */
-            for (int i = 0; i < 1000 ; i++) {
-                stm = connection.prepareStatement(stmSTR);
-                stm.setString(1, String.valueOf(i));
-                stm.setString(2,dict.getDict().get(i).getTarget());
-                stm.setString(3,dict.getDict().get(i).getExplain());
-                stm.executeUpdate();
-            }
-            showAlert("Database saved successfully to saveDictionary.db!");
+            Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/FXML/progressSave.fxml"));
+            window.setScene(new Scene(root));
+            window.centerOnScreen();
+            window.show();
         }
         catch (Exception e) {
             catchingException(e);
         }
+
     }
     //endregion
 }
