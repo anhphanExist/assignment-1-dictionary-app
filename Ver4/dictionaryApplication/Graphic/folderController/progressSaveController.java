@@ -8,7 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextFormatter;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -20,6 +23,7 @@ import static dictionaryApplication.dictionaryApplication.*;
 
 public class progressSaveController implements Initializable{
     @FXML private ProgressBar pgBar;
+    @FXML private ProgressIndicator pgIndicator;
     doWork task;
 
     public void cancelHandle(ActionEvent actionEvent) {
@@ -27,6 +31,7 @@ public class progressSaveController implements Initializable{
             if (!task.isComplete()) {
                 task.cancel();
                 pgBar.progressProperty().unbind();
+                pgIndicator.progressProperty().unbind();
                 Parent root = FXMLLoader.load(getClass().getResource("/dictionaryApplication/Graphic/FXML/dictionaryApplication.fxml"));
                 window.setScene(new Scene(root));
                 window.centerOnScreen();
@@ -49,6 +54,7 @@ public class progressSaveController implements Initializable{
         try {
             task = new doWork();
             pgBar.progressProperty().bind(task.progressProperty());
+            pgIndicator.progressProperty().bind(task.progressProperty());
             new Thread(task).start();
         } catch (Exception e) {
             catchingException(e);
