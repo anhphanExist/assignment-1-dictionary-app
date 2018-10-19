@@ -6,12 +6,10 @@ public class Main {
     public static void main(String[] args) {
     
         try (
-                // Initialize input stream
-                BufferedReader buff = new BufferedReader(new InputStreamReader(System.in))) {
-//            DictionaryCommandline.dictionaryBasic(buff);
-//            DictionaryCommandline.dictionaryAdvanced1(buff);
-//            DictionaryCommandline.dictionaryAdvanced2(buff);
-            DictionaryCommandline.dictionaryAdvanced3(buff);
+            BufferedReader buff = new BufferedReader(new InputStreamReader(System.in))) {
+            Dictionary dict = DictionaryManagement.insertFromFile("src/data.txt");
+            dict.sortDict();
+            DictionaryCommandline.dictionaryAdvanced(buff,dict);
         } catch (Exception e) {
             catchingException(e);
         }
