@@ -14,15 +14,51 @@ public class DictionaryCommandline {
         basic.sortDict();
         showAllWords(basic);
     }
-    
+
+    public static void dictionaryAdvanced(BufferedReader buff, Dictionary dict) {
+        String option = new String("-1");
+        int optionInt = -1;
+        while (optionInt != 0 ) {
+            try {
+                System.out.println("-----------------------------\nEnter your option:\n1: Show Dictionary\n2: Add\n" +
+                        "3: Edit\n4: Remove\n5: Search\n0: Exit");
+                option = buff.readLine();
+                optionInt = Integer.parseInt(option);
+                switch (optionInt) {
+                    case 0:
+                        break;
+                    case 1:
+                        showAllWords(dict);
+                        break;
+                    case 2:
+                        DictionaryManagement.dictionaryAdd(dict,buff);
+                        break;
+                    case 3:
+                        DictionaryManagement.dictionaryFindAndEdit(dict,buff);
+                        break;
+                    case 4:
+                        DictionaryManagement.dictionaryRemove(dict,buff);
+                        break;
+                    case 5:
+                        String input = DictionaryManagement.searchFromCommandline(buff);
+                        DictionaryManagement.dictionarySearcher(dict,input);
+                        break;
+                }
+            } catch (Exception e) {
+                Main.catchingException(e);
+                System.out.println("Invalid option");
+                optionInt = -1;
+            }
+            System.out.println("-----------------------------\n");
+        }
+
+
+    }
+
     /**
      * Read from file and print screen
      */
-    public static void dictionaryAdvanced1(BufferedReader buff) {
-        // Initialize new dictionary and get its information from txt file
-        Dictionary dict = DictionaryManagement.insertFromFile("src/data.txt");
-        // Sort current dictionary
-        dict.sortDict();
+    public static void dictionaryAdvanced1(BufferedReader buff,Dictionary dict) {
         // Show dictionary
         showAllWords(dict);
         // Look for a word in current dictionary
@@ -33,11 +69,7 @@ public class DictionaryCommandline {
      * read from file and perform edit
      * @param buff buffer input stream
      */
-    public static void dictionaryAdvanced2(BufferedReader buff) {
-        // Initialize new dicitonary and get its information from txt file
-        Dictionary dict = DictionaryManagement.insertFromFile("src/data.txt");
-        // Sort current dictionary
-        dict.sortDict();
+    public static void dictionaryAdvanced2(BufferedReader buff, Dictionary dict) {
         // Show dictionary
         showAllWords(dict);
         // Find and edit a word in current dictionary
@@ -50,11 +82,7 @@ public class DictionaryCommandline {
      * Read from file and perform remove
      * @param buff
      */
-    public static void dictionaryAdvanced3(BufferedReader buff) {
-        // Initialize new dicitonary and get its information from txt file
-        Dictionary dict = DictionaryManagement.insertFromFile("src/CommandLineDictionary/data.txt");
-        // Sort current dictionary
-        dict.sortDict();
+    public static void dictionaryAdvanced3(BufferedReader buff, Dictionary dict) {
         // Show dictionary
         showAllWords(dict);
         // Remove a word in current dictionary
