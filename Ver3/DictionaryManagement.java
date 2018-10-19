@@ -225,7 +225,7 @@ public class DictionaryManagement {
                     editTarget = editFromCommandline(buff);
                     editWord.setTarget(editTarget);
                 } else if (option.equals("2")) {
-                    System.out.println("Enter new explain: ");
+                    System.out.print("Enter new explain: ");
                     editExplain = editFromCommandline(buff);
                     editWord.setExplain(editExplain);
                 } else if (option.equals("3")) {
@@ -276,4 +276,29 @@ public class DictionaryManagement {
         }
     }
     //endregion
+
+    //region add a word to dictionary
+    public static void dictionaryAdd(Dictionary dict, BufferedReader buff) {
+        try {
+            String input = new String();
+            System.out.print("Enter new word target: ");
+            input = buff.readLine();
+
+            Word newWord = new Word();
+            input = input.toLowerCase();
+            newWord.setTarget(input);
+            if (dictionarySearcher(dict,input) != -1) {
+                System.out.println("world have already existed!");
+            }
+            else {
+                System.out.print("Enter new word explain: ");
+                input = buff.readLine();
+                newWord.setExplain(input);
+                dict.addDict(newWord);
+            }
+        }
+        catch (Exception e) {
+            Main.catchingException(e);
+        }
+    }
 }
