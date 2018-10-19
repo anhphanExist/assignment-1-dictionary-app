@@ -7,6 +7,7 @@ public class Dictionary {
     // Add NewWord into the end of the CommandLineDictionary.Dictionary
     public void addDict(Word _newWord) {
         this.dict.add(_newWord);
+        sortDict();
     }
 
     // Get the size of the dictionary
